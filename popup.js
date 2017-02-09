@@ -15,7 +15,7 @@ function putdata(res)
     nameNode.appendChild(nameText);
     node.appendChild(nameNode);
 
-      var domainText = document.createTextNode('('+res.articles[j].description+')');
+      var domainText = document.createTextNode(res.articles[j].description);
       var domainNode = document.createElement("span");
       domainNode.className = "detail";
       domainNode.appendChild(domainText);
