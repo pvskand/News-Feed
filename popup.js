@@ -23,15 +23,6 @@ function putdata(res)
       node.appendChild(document.createElement("br"));
     
     node.appendChild(document.createElement("br"));
-
-
-
-    var timeText = document.createTextNode(res.articles[j].publishedAt);
-    var timeNode = document.createElement("h5");
-    timeNode.className = "detail";
-    timeNode.appendChild(timeText);
-    node.appendChild(timeNode);
-    node.appendChild(document.createElement("br"));
     
     document.getElementById("content").appendChild(node);
     document.getElementById("content").appendChild(document.createElement("hr"));
@@ -112,25 +103,25 @@ $(document).ready(function(){
   });
 
   $("body").on('click',"header > h2", function(){
-    chrome.tabs.create({ url: 'https://news.ycombinator.com/' });
+    chrome.tabs.create({ url: 'https://newsapi.org' });
     return false;
   });
 
   $("body").on('mousedown',"header > h2", function(e){
     if( e.which == 2 ) {
-      chrome.tabs.create({ url: 'https://news.ycombinator.com/' });
+      chrome.tabs.create({ url: 'https://newsapi.org' });
     }
     return false;
   });
 
   $("body").on('click',".gh-btn", function(){
-    chrome.tabs.create({url: "https://github.com/nishanthvijayan/HackerNews-Feed"});
+    chrome.tabs.create({url: "https://github.com/pvskand/News-Feed"});
     return false;
   });
 
   $("body").on('mousedown',".gh-btn", function(e){
     if( e.which == 2 ) {
-      chrome.tabs.create({url: "https://github.com/nishanthvijayan/HackerNews-Feed"});
+      chrome.tabs.create({url: "https://github.com/pvskand/News-Feed"});
     }
     return false;
   });
