@@ -28,7 +28,22 @@ function putdata(res)
     document.getElementById("content").appendChild(node);
     document.getElementById("content").appendChild(document.createElement("hr"));
   }
+}
+
+// toggles between the loading gif,reload icon.
+function imgToggle(){
+  
+  src = $(".loading").attr('src');
+  if(src==="icons/refresh-white.png") 
+  {
+  	$(".loading").attr("src","icons/reload.gif");
   }
+  else 
+  {
+  	$(".loading").attr("src","icons/refresh-white.png");
+  }
+}
+
 
 
 
@@ -41,7 +56,7 @@ function fetchdata(){
   req.send();
   req.onload = function(){
 
-    res = JSON.parse(req.responseText);
+    var res = JSON.parse(req.responseText);
     putdata(res);
 
     var now = (new Date()).getTime()/1000;
@@ -56,17 +71,10 @@ function fetchdata(){
   imgToggle();
 }
 
-// toggles between the loading gif,reload icon.
-function imgToggle(){
-  
-  src = $('.loading').attr('src');
-  if(src=="icons/refresh-white.png") $(".loading").attr("src","icons/reload.gif");
-  else $(".loading").attr("src","icons/refresh-white.png");
-}
 
 $(document).ready(function(){
 
-
+  var chrome;
   var now = (new Date()).getTime()/1000;
   if(!localStorage.cache || now - parseInt(localStorage.time) > 5*60){
     // cache is old or not set
@@ -93,13 +101,13 @@ $(document).ready(function(){
     return false;
   });
 
-  $("body").on('click',"li > h3", function(){
+  $("body").on("click","li > h3", function(){
     chrome.tabs.create({url: this.data});
     return false;
   });
 
   $("body").on("mousedown","li > h3", function(e){
-    if( e.which == 2 ) {
+    if( e.which === 2 ) {
       chrome.tabs.create({url: this.data});
     }
     return false;
@@ -149,8 +157,7 @@ $(document).ready(function(){
   $("body").on("click",".loading", function(){
     
     src = $('.loading').attr('src');
-    
-    if(src=="icons/refresh-white.png") ;
+
 
   });
 
