@@ -35,19 +35,18 @@ function putdata(res)
 function fetchdata(){
 
   imgToggle();
-  req =  new XMLHttpRequest();
-  str = "the-hindu"
+  var req =  new XMLHttpRequest();
+  var str = "the-hindu";
   req.open("GET","https://newsapi.org/v1/articles?source=the-hindu&apiKey=fc65cf635c2544a5a56bf0710635beec",true);
   req.send();
-  console.log(req);
   req.onload = function(){
 
     res = JSON.parse(req.responseText);
     putdata(res);
-console.log("s");
-    now = (new Date()).getTime()/1000;
-	  localStorage.cache  = req.responseText;
-	  localStorage.time = now;
+
+    var now = (new Date()).getTime()/1000;
+	localStorage.cache  = req.responseText;
+	localStorage.time = now;
   };
 
   // req.onerror = function(){
@@ -68,7 +67,7 @@ function imgToggle(){
 $(document).ready(function(){
 
 
-  now = (new Date()).getTime()/1000;
+  var now = (new Date()).getTime()/1000;
   if(!localStorage.cache || now - parseInt(localStorage.time) > 5*60){
     // cache is old or not set
     fetchdata();
@@ -82,17 +81,15 @@ $(document).ready(function(){
     }
   }
 
-  addEventListener('scroll', function(){
+  addEventListener("scroll", function(){
     localStorage.scrollTop = document.body.scrollTop;
   });
 
   $("body").on('click',".loading", function(){
-    console.log("before");
     
     fetchdata();
     setTimeout(function(){imgToggle();}, 1000);
     imgToggle();
-    //console.log("here man!");
     return false;
   });
 
@@ -101,43 +98,43 @@ $(document).ready(function(){
     return false;
   });
 
-  $("body").on('mousedown',"li > h3", function(e){
+  $("body").on("mousedown","li > h3", function(e){
     if( e.which == 2 ) {
       chrome.tabs.create({url: this.data});
     }
     return false;
   });
   
-  $("body").on('click',"h5", function(){
+  $("body").on("click","h5", function(){
     chrome.tabs.create({url: this.data});
     return false;
   });
 
-  $("body").on('mousedown',"h5", function(e){
+  $("body").on("mousedown","h5", function(e){
     if( e.which == 2 ) {
       chrome.tabs.create({url: this.data});
     }
     return false;
   });
 
-  $("body").on('click',"header > h2", function(){
+  $("body").on("click","header > h2", function(){
     chrome.tabs.create({ url: 'https://newsapi.org' });
     return false;
   });
 
-  $("body").on('mousedown',"header > h2", function(e){
+  $("body").on("mousedown","header > h2", function(e){
     if( e.which == 2 ) {
       chrome.tabs.create({ url: 'https://newsapi.org' });
     }
     return false;
   });
 
-  $("body").on('click',".gh-btn", function(){
+  $("body").on("click",".gh-btn", function(){
     chrome.tabs.create({url: "https://github.com/pvskand/News-Feed"});
     return false;
   });
 
-  $("body").on('mousedown',".gh-btn", function(e){
+  $("body").on("mousedown",".gh-btn", function(e){
     if( e.which == 2 ) {
       chrome.tabs.create({url: "https://github.com/pvskand/News-Feed"});
     }
@@ -149,7 +146,7 @@ $(document).ready(function(){
 
   // this makes sure that fetchdata() is called only when the icon
   // is reload icon and not when it is the loading gif.
-  $("body").on('click',".loading", function(){
+  $("body").on("click",".loading", function(){
     
     src = $('.loading').attr('src');
     
